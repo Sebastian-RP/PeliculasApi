@@ -42,17 +42,17 @@ namespace PeliculasApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ActorCreacionDTO>> Post([FromBody] ActorCreacionDTO actorCreacionDTO)
+        public async Task<ActionResult<ActorCreacionDTO>> Post([FromForm] ActorCreacionDTO actorCreacionDTO)
         {
             var entidad = mapper.Map<Actor>(actorCreacionDTO);
             context.Add(entidad);
-            await context.SaveChangesAsync();
+            //await context.SaveChangesAsync();
             var dto = mapper.Map<ActorDTO>(entidad);
             return new CreatedAtRouteResult("obtenerAutor", new { id = entidad.Id }, dto);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] ActorCreacionDTO actorCreacionDTO)
+        public async Task<ActionResult> Put(int id, [FromForm] ActorCreacionDTO actorCreacionDTO)
         {
             var entidad = mapper.Map<Actor>(actorCreacionDTO);
             entidad.Id = id;
